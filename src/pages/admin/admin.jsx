@@ -6,7 +6,7 @@ import {Layout} from 'antd'
 
 
 import memoryUtils from '../../utils/memoryUtils'
-import Header from '../../components/header'
+import Header from '../../components/header/header'
 import LeftNav from '../../components/left-nav'
 import Home from '../home/home'
 import Category from '../category/category'
@@ -37,8 +37,8 @@ export default class Admin extends Component {
 				<LeftNav/>
 			</Sider>
 			<Layout>
-				<Header>Header</Header>
-				<Content style={{backgroundColor: '#fff'}}>
+				<Header></Header>
+				<Content style={{backgroundColor: '#fff',margin:20}}>
 					<Switch>
 						<Route path='/home' component={Home}/>
 						<Route path='/category' component={Category}/>
