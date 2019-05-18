@@ -38,8 +38,30 @@ export const reqWeather = (city) => {
 
 }
 
+export const reqCategorys = (parentId = '0') => ajax('/manage/category/list', {parentId})
+
+export const reqAddCategory = (categoryName,parentId ) => ajax('/manage/category/add', {
+	categoryName,
+	parentId
+
+}, 'POST')
 
 
+export const reqUpdateCategory = ({categoryId, categoryName}) => ajax('/manage/category/update', {categoryId, categoryName}, 'POST')
 
 
+export const reqProducts = (pageNum, pageSize) => ajax( '/manage/product/list', {pageNum, pageSize})
 
+
+//分类categoryId得到所属于哪一类的类名
+export const reqCategory = (categoryId) => ajax( '/manage/category/info', {categoryId})
+
+
+export const reqSearchProducts = ({pageNum, pageSize, searchName, searchType}) => ajax( '/manage/product/search', {
+	pageNum,
+	pageSize,
+	[searchType]: searchName,
+})
+
+
+export const reqUpdateStatus = (productId, status) => ajax( '/manage/product/updateStatus', {productId, status}, 'POST')
