@@ -29,7 +29,7 @@ const SubMenu = Menu.SubMenu
 				)
 			} else {
 
-				const cItem = item.children.find(cItem => cItem.key===path)
+				const cItem = item.children.find(cItem => path.indexOf(cItem.key)===0)
 				// 如果存在, 说明当前item的子列表需要打开
 				if (cItem) {
 					this.openKey = item.key
@@ -61,7 +61,10 @@ const SubMenu = Menu.SubMenu
 
 
 	render () {
-		const path = this.props.location.pathname
+		let path = this.props.location.pathname
+		if(path.indexOf('/product')===0) {
+			path = '/product'
+		}
 
 		const openKey = this.openKey
 

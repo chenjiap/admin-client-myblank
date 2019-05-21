@@ -65,3 +65,24 @@ export const reqSearchProducts = ({pageNum, pageSize, searchName, searchType}) =
 
 
 export const reqUpdateStatus = (productId, status) => ajax( '/manage/product/updateStatus', {productId, status}, 'POST')
+
+
+export const reqDeleteImg = (name) => ajax( '/manage/img/delete', {name}, 'POST')
+
+
+
+export const reqAddOrUpdateProduct = (product) => ajax( '/manage/product/' + ( product._id?'update':'add'), product, 'POST')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
