@@ -8,45 +8,69 @@ import './index.less'
 
 import menuList from '../../config/menuConfig'
 
+import memoryUtils from "../../utils/memoryUtils"
+
 
 const SubMenu = Menu.SubMenu
 
  class LeftNav extends Component {
+
+	 hasAuth = (item) => {
+		 const {key, isPublic} = item
+		 const menus = memoryUtils.user.role.menus
+		 const username = memoryUtils.user.username
+
+		 if(username==='admin' || isPublic || menus.indexOf(key)!==-1) {
+			 return true
+		 } else if(item.children){
+			 return !!item.children.find(child =>  menus.indexOf(child.key)!==-1)
+		 }
+
+		 return false
+
+
+
+
+	 }
+
+
 
 	getMenuNodes = (menuList) => {
 
 		// 得到当前请求的path
 		const path = this.props.location.pathname
 		return menuList.map(item => {
-			if(!item.children) {
-				return (
-          <Menu.Item key={item.key}>
-            <Link to={item.key}>
-              <Icon type={item.icon}/>
-              <span>{item.title}</span>
-            </Link>
-          </Menu.Item>
-				)
-			} else {
+			if(this.hasAuth(item)){
+				if(!item.children) {
+					return (
+						<Menu.Item key={item.key}>
+							<Link to={item.key}>
+								<Icon type={item.icon}/>
+								<span>{item.title}</span>
+							</Link>
+						</Menu.Item>
+					)
+				} else {
 
-				const cItem = item.children.find(cItem => path.indexOf(cItem.key)===0)
-				// 如果存在, 说明当前item的子列表需要打开
-				if (cItem) {
-					this.openKey = item.key
-				}
-				return (
-          <SubMenu
-            key={item.key}
-            title={
-              <span>
+					const cItem = item.children.find(cItem => path.indexOf(cItem.key)===0)
+					// 如果存在, 说明当前item的子列表需要打开
+					if (cItem) {
+						this.openKey = item.key
+					}
+					return (
+						<SubMenu
+							key={item.key}
+							title={
+								<span>
                 <Icon type={item.icon}/>
                 <span>{item.title}</span>
               </span>
-						}
-          >
-						{this.getMenuNodes(item.children)}
-          </SubMenu>
-				)
+							}
+						>
+							{this.getMenuNodes(item.children)}
+						</SubMenu>
+					)
+				}
 			}
 		})
 	}

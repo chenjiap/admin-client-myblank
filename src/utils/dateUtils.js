@@ -1,5 +1,5 @@
 
-export function formateData(time) {
+export function formateDate(time) {
 
 	if(!time)return
 

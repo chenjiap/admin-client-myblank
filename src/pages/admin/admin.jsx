@@ -32,7 +32,7 @@ export default class Admin extends Component {
 // 渲染此组件标签的效果: 自动跳转到指定的路由  (常用在render()中)
 		}
 
-		return <Layout style={{minheight: '100%'}}>
+		return <Layout style={{minHeight: '100%'}}>
 			<Sider>
 				<LeftNav/>
 			</Sider>

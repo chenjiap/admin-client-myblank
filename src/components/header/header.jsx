@@ -6,7 +6,7 @@ import {withRouter} from 'react-router-dom'
 import './index.less'
 import LinkButton from '../link-button'
 
-import {formateData} from '../../utils/dataUtils'
+import {formateDate} from '../../utils/dateUtils'
 import {reqWeather} from '../../api'
 
 import memoryUtils from '../../utils/memoryUtils'
@@ -16,7 +16,7 @@ import menuList from '../../config/menuConfig'
 
  class Header extends Component {
   state = {
-    getTime:formateData(Date.now()),
+    getTime:formateDate(Date.now()),
 		dayPictureUrl:'',
     weather:''
   }
@@ -34,7 +34,7 @@ import menuList from '../../config/menuConfig'
 		this.intervalId = setInterval(() => {
     this.setState(
       {
-				getTime:formateData(Date.now())
+				getTime:formateDate(Date.now())
       }
     )
 
@@ -48,7 +48,7 @@ import menuList from '../../config/menuConfig'
 			if(cItem.key === path){
 				title = cItem.title
       }else if(cItem.children){
-				const cItemObj = cItem.children.find( a=> a.key === path)
+				const cItemObj = cItem.children.find( a=> path.indexOf(a.key) === 0)
         if(cItemObj){
 				  title = cItemObj.title
         }
