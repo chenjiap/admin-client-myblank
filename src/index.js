@@ -1,17 +1,17 @@
-
 import React from 'react'
 
 import ReactDOM from 'react-dom'
 
-import App from './App'
+import {Provider} from 'react-redux'
 
-import storageUtils from './utils/storageUtils'
-import  memoryUtil from './utils/memoryUtils'
-
-const user = storageUtils.getUser()
-if(user._id) { // 前面登陆过
-	memoryUtil.user = user
-}
+import store from './redux/store'
 
 
-ReactDOM.render(<App/>,document.getElementById('root'))
+import App from './containers/App'
+
+ReactDOM.render(
+		<Provider store={store}>
+			<App/>
+		</Provider>
+,document.getElementById('root')
+)
