@@ -5,7 +5,9 @@ import jsonp from 'jsonp'
 
 import ajax from './ajax'
 
-export const reqLogin = (username, password) => ajax('/login', {username, password}, 'POST')
+const BASE = ''
+
+export const reqLogin = (username, password) => ajax(BASE +'/login', {username, password}, 'POST')
 
 export const reqWeather = (city) => {
 
@@ -14,7 +16,7 @@ export const reqWeather = (city) => {
 	return new Promise((resolve,reject) => {
 
     jsonp(
-    	url,
+				url,
 			(err,data) => {
     		console.log(data)
     		if(!err && data.status === 'success'){
@@ -38,54 +40,54 @@ export const reqWeather = (city) => {
 
 }
 
-export const reqCategorys = (parentId = '0') => ajax('/manage/category/list', {parentId})
+export const reqCategorys = (parentId = '0') => ajax(BASE +'/manage/category/list', {parentId})
 
-export const reqAddCategory = (categoryName,parentId ) => ajax('/manage/category/add', {
+export const reqAddCategory = (categoryName,parentId ) => ajax(BASE +'/manage/category/add', {
 	categoryName,
 	parentId
 
 }, 'POST')
 
 
-export const reqUpdateCategory = ({categoryId, categoryName}) => ajax('/manage/category/update', {categoryId, categoryName}, 'POST')
+export const reqUpdateCategory = ({categoryId, categoryName}) => ajax(BASE +'/manage/category/update', {categoryId, categoryName}, 'POST')
 
 
-export const reqProducts = (pageNum, pageSize) => ajax( '/manage/product/list', {pageNum, pageSize})
+export const reqProducts = (pageNum, pageSize) => ajax(BASE + '/manage/product/list', {pageNum, pageSize})
 
 
 //分类categoryId得到所属于哪一类的类名
-export const reqCategory = (categoryId) => ajax( '/manage/category/info', {categoryId})
+export const reqCategory = (categoryId) => ajax(BASE + '/manage/category/info', {categoryId})
 
 
-export const reqSearchProducts = ({pageNum, pageSize, searchName, searchType}) => ajax( '/manage/product/search', {
+export const reqSearchProducts = ({pageNum, pageSize, searchName, searchType}) => ajax(BASE + '/manage/product/search', {
 	pageNum,
 	pageSize,
 	[searchType]: searchName,
 })
 
 
-export const reqUpdateStatus = (productId, status) => ajax( '/manage/product/updateStatus', {productId, status}, 'POST')
+export const reqUpdateStatus = (productId, status) => ajax( BASE +'/manage/product/updateStatus', {productId, status}, 'POST')
 
 
-export const reqDeleteImg = (name) => ajax( '/manage/img/delete', {name}, 'POST')
+export const reqDeleteImg = (name) => ajax( BASE +'/manage/img/delete', {name}, 'POST')
 
 
 
-export const reqAddOrUpdateProduct = (product) => ajax( '/manage/product/' + ( product._id?'update':'add'), product, 'POST')
+export const reqAddOrUpdateProduct = (product) => ajax( BASE +'/manage/product/' + ( product._id?'update':'add'), product, 'POST')
 
-export const reqRoles = () => ajax('/manage/role/list')
-
-
-export const reqAddRole = (roleName) => ajax( '/manage/role/add', {roleName}, 'POST')
-
-export const reqUpdateRole = (role) => ajax('/manage/role/update', role, 'POST')
-
-export const reqUsers = () => ajax('/manage/user/list')
-
-export const reqAddUser = (user) => ajax('/manage/user/add', user, 'POST')
+export const reqRoles = () => ajax(BASE +'/manage/role/list')
 
 
-export const reqDeleteUser = (userId) => ajax( '/manage/user/delete', {userId}, 'POST')
+export const reqAddRole = (roleName) => ajax( BASE +'/manage/role/add', {roleName}, 'POST')
+
+export const reqUpdateRole = (role) => ajax(BASE +'/manage/role/update', role, 'POST')
+
+export const reqUsers = () => ajax(BASE +'/manage/user/list')
+
+export const reqAddUser = (user) => ajax(BASE +'/manage/user/add', user, 'POST')
 
 
-export const reqAddOrUpdateUser = (user) => ajax('/manage/user/'+(user._id ? 'update' : 'add'), user, 'POST')
+export const reqDeleteUser = (userId) => ajax(BASE + '/manage/user/delete', {userId}, 'POST')
+
+
+export const reqAddOrUpdateUser = (user) => ajax(BASE +'/manage/user/'+(user._id ? 'update' : 'add'), user, 'POST')

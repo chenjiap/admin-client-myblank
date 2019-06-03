@@ -16,6 +16,8 @@ import Bar from '../charts/bar'
 import Line from '../charts/line'
 import Pie from '../charts/pie'
 
+import NotFound from '../not-found/no-found'
+
 
 
 const {Footer, Sider, Content} = Layout
@@ -37,9 +39,10 @@ const {Footer, Sider, Content} = Layout
 				<LeftNav/>
 			</Sider>
 			<Layout>
-				<Header></Header>
+				<Header/>
 				<Content style={{backgroundColor: '#fff',margin:20}}>
 					<Switch>
+						<Redirect exact from='/' to='/home'/>
 						<Route path='/home' component={Home}/>
 						<Route path='/category' component={Category}/>
 						<Route path='/product' component={Product}/>
@@ -48,8 +51,7 @@ const {Footer, Sider, Content} = Layout
 						<Route path='/charts/bar' component={Bar}/>
 						<Route path='/charts/line' component={Line}/>
 						<Route path='/charts/pie' component={Pie}/>
-						<Redirect to='/home'/>
-
+						<Route component={NotFound}/>
 					</Switch>
 				</Content>
 				<Footer style={{textAlign: 'center', color: '#cccccc'}}>推荐使用谷歌浏览器，可以获得更佳页面操作体验</Footer>

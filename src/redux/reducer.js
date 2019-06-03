@@ -14,7 +14,7 @@ import {
 
 
 
-const initHeadTitle = '首页'
+const initHeadTitle = ''
 
 function headTitle(state = initHeadTitle, action) {
 	switch (action.type) {
